@@ -5,13 +5,13 @@ import pendulum
 
 from github import Github
 
-# 14 for test 12 real get up
 GET_UP_ISSUE_NUMBER = 1
 GET_UP_MESSAGE_TEMPLATE = (
     "The time you get up is--{get_up_time}.\r\n\r\n Come on please, get up now! You'll missing the bus! \r\n\r\n Status\r\n {sentence}"
 )
+# TODO: replace poem api with others, finding...
 SENTENCE_API = "https://v1.jinrishici.com/all"
-DEFAULT_SENTENCE = "😁\r\n😭\r\n🤔\r\n😴\r\n"
+DEFAULT_SENTENCE = "😁 Please be happy!\r\n"
 TIMEZONE = "Asia/Shanghai"
 
 
@@ -46,7 +46,6 @@ def get_today_get_up_status(issue):
 def make_get_up_message():
     sentence = get_one_sentence()
     now = pendulum.now(TIMEZONE)
-    # 3 - 7 means early for me
     is_get_up_early = 6 <= now.hour <= 18
     get_up_time = now.to_datetime_string()
     body = GET_UP_MESSAGE_TEMPLATE.format(get_up_time=get_up_time, sentence=sentence)
